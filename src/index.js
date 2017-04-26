@@ -200,10 +200,29 @@ export default function ({types: t}) {
                     p.relative(process.cwd(), filename)
                 );
 
-                const messagesFilename = p.join(
+                let messagesDirectory = p.join(
                     opts.messagesDir,
-                    p.dirname(relativePath),
-                    basename + '.json'
+                    p.dirname(relativePath)
+                );
+
+                if (opts.messagesSubfolder) {
+                    messagesDirectory = p.join(
+                        messagesDirectory,
+                        opts.messagesSubfolder
+                    );
+                }
+
+                let messagesFilename;
+
+                if (opts.messagesFilenameSuffix) {
+                    messagesFilename = basename + '.' + opts.messagesFilenameSuffix + '.json';
+                } else {
+                    messagesFilename = basename + '.json';
+                }
+
+                messagesFilename = p.join(
+                    messagesDirectory,
+                    messagesFilename
                 );
 
                 const messagesFile = JSON.stringify(descriptors, null, 2);

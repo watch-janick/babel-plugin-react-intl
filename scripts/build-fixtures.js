@@ -30,6 +30,8 @@ fixtures.forEach((fixture) => {
             [plugin, {
                 ...options,
                 messagesDir: false,
+                messagesSubfolder: false,
+                messagesFilenameSuffix: false,
             }],
         ],
     });
